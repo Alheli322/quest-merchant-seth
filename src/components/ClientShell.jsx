@@ -24,23 +24,15 @@ const avatar = useAvatarStore(
 const setAvatar = useAvatarStore((state) => state.setAvatar)
 
 const avatarOptions = [
-  ["artificer.svg", "Artífice"],
-  ["barbarian.svg", "Bárbaro"],
-  ["bard.svg", "Bardo"],
-  ["cleric.svg", "Clérigo"],
-  ["druid2.svg", "Druida"],
-  ["fighter.svg", "Guerrero"],
-  ["monk.svg", "Monje"],
-  ["paladin.svg", "Paladín"],
-  ["ranger.svg", "Explorador"],
-  ["rogue.svg", "Pícaro"],
-  ["sorcerer.svg", "Hechicero"],
-  ["warlock.svg", "Brujo"],
-  ["wizard.svg", "Mago"],
-  ["book.svg", "Libro"],
-  ["dagger.svg", "Daga"],
-  ["dice.svg", "Dados"],
-  ["dnd.svg", "D&D"]
+  ["star.svg"],
+  ["leaf.svg"],
+  ["ruedita.svg"],
+  ["flame.svg"],
+  ["biohazard.svg"],
+  ["copo.svg"],
+  ["mask.svg"],
+  ["origami.svg"],
+  ["rose.svg",],
 ]
 
   const handleLogout = () => {
