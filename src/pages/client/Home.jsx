@@ -4,6 +4,7 @@ import ProductCard from "../../components/ProductCard"
 import { ErrorBox, Loading } from "../../components/Ui"
 import { Q_CATALOGO } from "../../lib/queries"
 import { useApi } from "../../lib/useApi"
+import { ScrollReveal } from "@/components/motion/scroll-reveal"
 
 export default function Home({ navigate }) {
     const [search, setSearch] = useState("")
@@ -57,14 +58,20 @@ export default function Home({ navigate }) {
 
             {!loading && !error && (
                 <div className="product-grid">
-                    {(data?.productos || []).map((product) => (
+                    {(data?.productos || []).map((product, index) => (
+                        <ScrollReveal
+                        key={product.id}
+                        delay={index * 0.08}
+                        y={20}
+                        blur={6}
+                        >
                         <ProductCard
-                            key={product.id}
                             product={product}
                             onOpen={(id) => navigate(`/producto/${id}`)}
                         />
+                        </ScrollReveal>
                     ))}
-                </div>
+                    </div>
             )}
         </ClientShell>
     )
