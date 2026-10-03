@@ -2,6 +2,7 @@ import { useCartStore, selectCount } from "../store/cartStore"
 import { useAuthStore } from "../store/authStore"
 import { useState } from "react"
 import { useAvatarStore } from "../store/avatarStore"
+import { Drawer } from "@/components/motion/drawer"
 
 export default function ClientShell({
   children,
@@ -107,7 +108,7 @@ const avatarOptions = [
             <div>
               <button
                 className="profile-avatar"
-                onClick={() => setShowAvatars(!showAvatars)}
+                onClick={() => setShowAvatars(true)}
               >
                 <img
                   src={`/avatars/${avatar}`}
@@ -117,28 +118,51 @@ const avatarOptions = [
 
                 <div>
                   <strong>{usuario.nombre}</strong>
-                  <span>{usuario.rol}</span>
                 </div>
               </div>
 
-              {showAvatars && (
-                <div className="avatar-picker">
+              <Drawer
+                open={showAvatars}
+                onOpenChange={setShowAvatars}
+                side="right"
+                ariaLabel="Seleccionar avatar"
+                className="avatar-drawer"
+                backdropClassName="avatar-drawer-backdrop"
+              >
+                <div className="avatar-drawer-header">
+                  <div>
+                    <span className="eyebrow">PERSONAJE</span>
+                    <h2>Elige tu clase</h2>
+                  </div>
+
+                  <button
+                    className="ghost"
+                    onClick={() => setShowAvatars(false)}
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                <div className="avatar-drawer-grid">
                   {avatarOptions.map(([file, name]) => (
                     <button
                       key={file}
-                      className={avatar === file ? "avatar-option selected" : "avatar-option"}
+                      className={
+                        avatar === file
+                          ? "avatar-drawer-option selected"
+                          : "avatar-drawer-option"
+                      }
                       onClick={() => {
                         setAvatar(usuario.id, file)
                         setShowAvatars(false)
                       }}
-                      title={name}
                     >
                       <img src={`/avatars/${file}`} alt={name} />
                       <span>{name}</span>
                     </button>
                   ))}
                 </div>
-              )}
+              </Drawer>
 
               <button
                 className="side-link"

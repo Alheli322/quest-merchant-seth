@@ -50,34 +50,34 @@ export default function Cart({ navigate }) {
                 </div>
 
                 <div className="quantity-row compact">
-                  <button
-                    className="ghost"
-                    onClick={() =>
-                      update(
-                        usuario.id,
-                        item.producto.id,
-                        item.cantidad - 1
-                      )
-                    }
-                  >
-                    −
-                  </button>
+                <button
+                  className="ghost"
+                  onClick={() =>
+                    update(
+                      usuario.id,
+                      item.producto.id,
+                      item.cantidad - 1
+                    )
+                  }
+                >
+                  −
+                </button>
 
-                  <strong>{item.cantidad}</strong>
+                <strong>{item.cantidad}</strong>
 
-                  <button
-                    className="ghost"
-                    onClick={() =>
-                      update(
-                        usuario.id,
-                        item.producto.id,
-                        item.cantidad + 1
-                      )
-                    }
-                  >
-                    +
-                  </button>
-                </div>
+                <button
+                  className="ghost"
+                  onClick={() =>
+                    update(
+                      usuario.id,
+                      item.producto.id,
+                      item.cantidad + 1
+                    )
+                  }
+                >
+                  +
+                </button>
+              </div>
 
                 <strong>
                   $

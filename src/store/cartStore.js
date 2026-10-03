@@ -112,8 +112,10 @@ export const useCartStore = create(
     )
 )
 
+const EMPTY_CART = []
+
 export const selectItems = (usuarioId) => (state) =>
-    state.carts[usuarioId] || []
+    state.carts[usuarioId] ?? EMPTY_CART
 
 export const selectCount = (usuarioId) => (state) =>
     (state.carts[usuarioId] || []).reduce(

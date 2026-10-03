@@ -2,6 +2,7 @@ import { useState } from "react"
 import { mutateGraphQL } from "../lib/apollo"
 import { M_LOGIN, M_REGISTRAR_USUARIO } from "../lib/queries"
 import { useAuthStore } from "../store/authStore"
+import { Input } from "@/components/motion/input"
 
 export default function AuthForm({ mode = "login", onSuccess }) {
     const [email, setEmail] = useState("")
@@ -64,60 +65,72 @@ export default function AuthForm({ mode = "login", onSuccess }) {
     }
 
     return (
-        <form onSubmit={submit}>
+        <form className="auth-form" onSubmit={submit}>
+            <div className="auth-heading">
             <h1>{isRegister ? "Crear cuenta" : "Iniciar sesión"}</h1>
+            <p>
+                {isRegister
+                ? "Crea tu cuenta y comienza tu próxima aventura."
+                : "Continúa tu aventura en Quest Merchant."}
+            </p>
+            </div>
 
             {isRegister && (
-                <label>
-                    Nombre
-                    <input
-                        required
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
-                    />
-                </label>
+            <Input
+                label="Nombre"
+                required
+                value={nombre}
+                onChange={setNombre}
+                placeholder="Tu nombre"
+            />
             )}
 
-            <label>
-                Correo
-                <input
-                    required
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </label>
+            <Input
+                label="Correo"
+                required
+                type="email"
+                value={email}
+                onChange={setEmail}
+                placeholder="aventurero@correo.com"
+            />
 
-            <label>
-                Contraseña
-                <input
-                    required
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+            <Input
+                label="Contraseña"
+                required
+                type="password"
+                value={password}
+                onChange={setPassword}
+                placeholder="••••••••"
                 />
-            </label>
 
             {isRegister && (
-                <label>
-                    Confirmar contraseña
-                    <input
-                        required
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                    />
-                </label>
+                <Input
+                    label="Confirmar contraseña"
+                    required
+                    type="password"
+                    value={confirmPassword}
+                    onChange={setConfirmPassword}
+                    placeholder="••••••••"
+                    error={
+                    confirmPassword && password !== confirmPassword
+                        ? "Las contraseñas no coinciden"
+                        : false
+                    }
+                    success={
+                    Boolean(confirmPassword) &&
+                    password === confirmPassword
+                    }
+                />
             )}
 
             {error && <div className="inline-error">{error}</div>}
 
-            <button disabled={loading}>
-                {loading
-                    ? "Procesando..."
-                    : isRegister
-                        ? "Crear cuenta"
-                        : "Iniciar sesión"}
+            <button className="auth-submit" disabled={loading}>
+            {loading
+                ? "Procesando..."
+                : isRegister
+                ? "Crear cuenta"
+                : "Iniciar sesión"}
             </button>
         </form>
     )
